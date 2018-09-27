@@ -4,6 +4,14 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type : DataTypes.STRING,
       validate : {
+        minLength : function(input, cbMinLength){
+          if(input.length < 8){
+            cbMinLength('Username must use min 8 character')
+          }
+          else{
+            cbMinLength()
+          }
+        },
         notDuplicate : function(input, cbNotduplicate){
           const Op = sequelize.Op
           User.findOne({
@@ -20,7 +28,19 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    password: DataTypes.STRING,
+    password: {
+      type : DataTypes.STRING,
+      validate : {
+        minLength : function(input, cbMinLength){
+          if(input.length < 8){
+            cbMinLength('Password must use min 8 character')
+          }
+          else{
+            cbMinLength()
+          }
+        }
+      }
+    },
     email: {
       type : DataTypes.STRING,
       validate : {
