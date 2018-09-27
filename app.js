@@ -12,8 +12,10 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use( express.static( "public" ) );
 app.use('/css', express.static('public/css'))
 app.use('/img', express.static('public/img'))
+
 
 const session = require('express-session')
 app.use(session({
@@ -26,9 +28,7 @@ app.use(session({
     }
 }))
 
-app.get('/dummy', auth, (req, res) => {
-    res.send(' ini adalah root dummy')
-})
+
 app.get("/login",function(req, res){
     res.render('loginPage')
 })
@@ -65,6 +65,12 @@ app.post('/register', (req, res) => {
         res.send(err)
     })
 })
+
+
+const routerGame = require('./routes/game')
+
+app.use('/', auth, routerGame) // ini harus di ubah jadi ke bawah
+app.use('/game', auth, routerGame)
 
 app.use('/', routes)
 

@@ -1,3 +1,4 @@
+
 const {Game, Review, User} = require('../models/index')
 
 class ControllerGame{
@@ -31,6 +32,29 @@ class ControllerGame{
         .catch(err => {
             res.send(err)
         })
+    }
+
+
+
+
+    static showAllGames(req,res) {
+        // res.send('aaa')
+        let q = {}
+        if (req.query.title) {            
+            q = { where: {
+                title: req.query.title
+            }}
+
+            console.log(q)
+        }
+        Game.findAll(q)
+            .then(games => {
+                res.render('gameHome', {games: games, user: 'admin' })
+            })
+            .catch(err => {
+                console.log(err);
+                res.send(err)
+            })
     }
 }
 

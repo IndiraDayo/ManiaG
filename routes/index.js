@@ -3,7 +3,7 @@ const game = require('./game')
 const auth = require('../helpers/authentification')
 const Controller = require('../controllers/index')
 
-router.use('/game', game)
+router.use('/game',auth, game)
 
 
 router.get('/', auth, Controller.showAllGame)
