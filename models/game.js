@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Game.associate = function(models) {
     Game.belongsToMany(models.User, {through: 'Review'})
-    Game.hasMamy(models.Review)
+    Game.hasMany(models.Review)
     Game.belongsTo(models.Category)
   };
   return Game;

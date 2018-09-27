@@ -5,7 +5,15 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     email: DataTypes.STRING,
     role: DataTypes.STRING
-  }, {});
+  }, {
+    hooks: {
+      beforeCreate : (User, option) => {
+        if(!User.role){
+          User.role = 'users'
+        }
+      }
+    }
+  });
   User.associate = function(models) {
     User.belongsToMany(models.Game, {through: 'Review'})
     User.hasMany(models.Review)
