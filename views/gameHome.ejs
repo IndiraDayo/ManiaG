@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <title>Game Page</title>
+    </head>
+    <body align="center" class="wholebody">
+        <nav class="topbar">
+            <div class="logo">
+                <img style=" height: 3vw; line-height: 4vw;" src="/image/Logo (2).png"/>
+            </div>
+            <div class="menu boxhead">
+                <form action="/" method="GET">
+                    <input type="text" placeholder=" search title" name="title">
+                <a class="menu_items" href= "/"><span>MENU</span></a>
+                <a class="menu_items" href= ""><span>profile</span></a>
+                <a class="menu_items" href= ""><span>logout</span></a>
+            </form>
+            </div>
+        </nav>
+        <div style="margin-top: 10%; margin-bottom: 7%; color: white;">
+            <% games.forEach(game => { %>
+             <div class="gameDiv" onclick="location.href='/game/<%= game.id %>'">
+
+                <img style="float:left; height: 100%; width: 35%" src="/image/<%= game.image %>" />
+                <div style=" width: 55%;margin-left: 6%; margin-top: 2%;float:left; text-align: left;" >
+                    <p style="margin-bottom: 2%;font-size: 2.5vw; font-family: 'Avenir';"><%= game.title %></>
+                    <% if (game.description.length >320) {%>
+                    <p style="font-size: 1vw; font-family: 'Avenir';"><%= game.description.substr(0,320) %>...</>
+                    <% } else { %>
+                    <p style="font-size: 1vw; font-family: 'Avenir';"><%= game.description %></>
+                    <% } %>
+                </div>
+               
+             </div>
+            <% }) %>
+        </div>
+    </body>
+</html>
