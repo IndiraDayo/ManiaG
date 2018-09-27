@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "123456789",
+    "password": "postgres",
     "database": "ManiaG_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
