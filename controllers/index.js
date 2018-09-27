@@ -1,4 +1,4 @@
-const {Game, Review, User} = require('../models/index')
+const {Category, Game, Review, User} = require('../models/index')
 
 
 class Controller{
@@ -15,12 +15,13 @@ class Controller{
     static userActivity(req, res){
         User
         .findOne({
-            include : {model : Review}
+            include : {model : Game, include : {model : Category}}
         },{
             where : { username : req.params.username}
         })
         .then(userData => {
-            res.send(userData)
+            // res.send(userData)
+            res.render('userActivity', {userData})
         })
         .catch(err => {
             res.send(err)
