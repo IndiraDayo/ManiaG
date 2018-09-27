@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1><%= showGameById.title %></h1>
+    <p><%= showGameById.description %></p>
+
+    <form action="/game/<%= showGameById.id %>" method="POST">
+        <input type="hidden" name="GameId" value="<%= showGameById.id %>">
+        <input type="hidden" name="UserId" value="<%= session.user.user_id %>">
+        <label>Rating : </label>
+        <input type="text" name="rating">
+        <label>Comment : </label>
+        <input type="text" name="comment">
+        <input type="submit" value="Submit">
+    </form>
+
+    <% showAllRatingAndComment.forEach(list => { %>
+        <% list.Users.forEach(listRating => { %>
+            <table border="1">
+                <tr>
+                    <td>
+                        <%= listRating.username %> <br>
+                        <%= listRating.Review.rating %> <br>
+                        <%= listRating.Review.comment %> <br>
+                    </td>
+                </tr>
+            </table>
+        <% }) %> 
+    <% }) %>
+    
+</body>
+</html>

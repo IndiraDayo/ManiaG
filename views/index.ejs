@@ -7,7 +7,23 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>INI DASHBOARD</h1>
+    <h1>Hi, <%= session.user.name%></h1>
+    <a href="/<%= session.user.name%>/editProfile">Edit Profiles</a><br>
     <a href="/<%= session.user.name%>/games">Check All Game Has Been Reviewed</a>
+
+    <table border="1">
+        <thead>
+            <th>Title</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <% showAllGame.forEach(list => { %>
+                <tr>
+                    <td><%= list.title %></td>
+                    <td><a href="/game/<%= list.id %>">Command And Rating</a></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
 </html>
