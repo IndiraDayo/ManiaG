@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hi, <%= userData.username %></h1>
+    <table border="1">
+        <thead>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Category</th>
+        </thead>
+        <tbody>
+            <% userData.Games.forEach(list => { %>
+                 <tr>
+                     <td><a href="/game/<%= list.id %>"><%= list.title %></a></td>
+                     <td><%= list.Review.rating %></td>
+                     <td><%= list.Category.name %></td> 
+                    
+                 </tr>
+             <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
