@@ -43,9 +43,15 @@ app.post('/login', (req,res) => {
     .then(getId => {
         req.session.user = {
             name : getId.username,
-            user_id : getId.id
+            user_id : getId.id,
+            role : getId.role
         }
-        res.redirect('/')
+        if(getId.role === 'user'){
+            res.redirect('/')
+        }
+        else if(getId.role === 'admin'){
+            res.redirect('/admin')
+        }
     })
     .catch(err => {
         res.send(err.message)

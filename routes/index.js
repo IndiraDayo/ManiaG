@@ -13,6 +13,10 @@ router.get('/:username/games', Controller.userActivity)
 router.get('/:username/editProfile', Controller.userShowEditForm)
 router.post('/:username/editProfile', Controller.userEditProfile)
 
+router.get('/admin', (req, res) => {
+    res.send('admin')
+})
+
 
 
 
