@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>EDIT PROFILE</h1>
+    <h1>Hi , <%= session.user.name %></h1>
+    <form action="/<%= session.user.name %>/editProfile" method="POST">
+        <label>Email :</label><br>
+        <input type="text" name="email" value="<%= showForEdit.email %>"><br>
+        <label>Password</label><br>
+        <input type="text" name="password" value="<%= showForEdit.password %>"><br>
+        <input type="submit" value="update">
+    </form>
+</body>
+</html>
