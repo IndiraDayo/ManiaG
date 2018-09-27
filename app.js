@@ -68,6 +68,7 @@ app.post('/register', (req, res) => {
 
 
 const routerGame = require('./routes/game')
+app.locals.helpers = require('./helpers/index')
 
 app.use('/', auth, routerGame) // ini harus di ubah jadi ke bawah
 app.use('/game', auth, routerGame)
