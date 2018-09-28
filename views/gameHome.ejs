@@ -37,10 +37,7 @@
                 <img style="float:left; height: 100%; width: 35%" src="/image/<%= game.image %>" />
                 <div style=" width: 55%;margin-left: 6%; margin-top: 2%;float:left; text-align: left;" >
                     <p style="margin-bottom: 2%;font-size: 2.5vw; font-family: 'Avenir';"><%= game.title %></>
-                    <% if (session.user.role === 'admin') {%>
-                        <button onclick="">✘</button>
-                        <button onclick="location.href='/game/<%= game.id %>/delete'">✎</button>
-                    <% } %>
+                    
                     <% if (game.description.length >320) {%>
                     <p style="font-size: 1vw; font-family: 'Avenir';"><%= game.description.substr(0,320) %>...</>
                     <% } else { %>
