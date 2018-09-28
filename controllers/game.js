@@ -58,7 +58,7 @@ class ControllerGame{
         }
         Game.findAll(q)
             .then(games => {
-                res.render('gameHome', {games: games, user: 'admin', session :req.session })
+                res.render('gameHome', {games: games, session :req.session })
             })
             .catch(err => {
                 console.log(err);

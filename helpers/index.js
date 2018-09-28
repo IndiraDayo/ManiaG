@@ -9,7 +9,12 @@ class Helpers{
             totalRating += list.Review.rating
         })
         
-        return Number((totalRating/countReview).toFixed(1))
+        if(totalRating === 0 && countReview === 0){
+            return 0
+        }
+        else{
+            return Number((totalRating/countReview).toFixed(1))
+        }
     }
 
 }
