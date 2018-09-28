@@ -52,6 +52,7 @@ app.post('/login', (req,res) => {
         }
         else if(getId.role === 'admin'){
             res.redirect('/admin')
+
         }
     })
     .catch(err => {

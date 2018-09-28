@@ -11,21 +11,30 @@
             </div>
             <div class="menu boxhead">
                 <form action="/" method="GET">
-                    <input type="text" placeholder=" search title" name="title">
+                    <input style="font-size: 0.9vw; line-height: 1.8vw;" type="text" placeholder=" search game name" name="title">
                 <a class="menu_items" href= "/"><span>MENU</span></a>
+
                 <a class="menu_items" href= "<%= session.user.name%>/editProfile"><span>profile</span></a>
                 <a class="menu_items" href= "/logout"><span>logout</span></a>
+
+
             </form>
             </div>
         </nav>
         <div style="margin-top: 10%; margin-bottom: 7%; color: white;">
+            <% if (games[0] === undefined) { %>
+                <p>No Result Found</p>
+            <% } %>
             <% games.forEach(game => { %>
              <div class="gameDiv" onclick="location.href='/game/<%= game.id %>'">
 
                 <img style="float:left; height: 100%; width: 35%" src="/image/<%= game.image %>" />
                 <div style=" width: 55%;margin-left: 6%; margin-top: 2%;float:left; text-align: left;" >
                     <p style="margin-bottom: 2%;font-size: 2.5vw; font-family: 'Avenir';"><%= game.title %></>
-                        
+                    <% if (session.user.role === 'admin') {%>
+                        <button onclick="location.href='/game/<%= game.id %>'">✘</button>
+                        <button onclick="location.href='/game/<%= game.id %>'">✎</button>
+                    <% } %>
                     <% if (game.description.length >320) {%>
                     <p style="font-size: 1vw; font-family: 'Avenir';"><%= game.description.substr(0,320) %>...</>
                     <% } else { %>
