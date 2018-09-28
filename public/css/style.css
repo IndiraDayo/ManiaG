@@ -31,9 +31,11 @@
     float: right;
     margin-right: 15%;
 }
+
+
 .logo {
     float: left;
-    margin-left: 15%;
+    margin-left: 14.2%;
 }
 
 .the_logo {
@@ -54,7 +56,11 @@
     margin-left: 1vw;
     color: #ffffff;
 }
-
+.menu_items:hover,
+.menu_items:focus {
+    cursor: pointer;
+    color: rgb(255, 74, 74);
+}
 
 .boxhead a {
     color: #FFFFFF;
@@ -67,10 +73,28 @@
     margin-right: 15%; 
     height: 14vw; 
     background: rgba(39, 39, 39, 0.5);
+    transition: transform .2s;
 }
 
 .gameDiv:hover,
 .gameDiv:focus {
+    transform: scale(1.04);
     cursor: pointer;
     background: #2e1717;
+}
+
+button {
+    color: #FFFFFF;
+    background: rgb(99, 10, 10);
+    float: right;
+    width: 6%;
+    border-radius: 0.2vw;
+    font-size: 1.3vw;
+    margin-left: 2%;
+    margin-top: 2.5%;
+}
+
+button:focus,
+button:hover {
+    background: #723636;
 }
