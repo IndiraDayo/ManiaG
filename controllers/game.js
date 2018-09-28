@@ -1,13 +1,25 @@
-
 const {Game, Review, User} = require('../models/index')
 
 class ControllerGame{
 
     static giveRating(req, res){
         Review
-        .create(req.body)
-        .then(() => {
-            res.redirect('/')
+        .findOne({
+            where : { UserId : req.body.UserId, GameId : req.body.GameId}
+        })
+        .then(data => {
+            // res.redirect('/')
+            if(data){
+                res.redirect('/')
+            }
+            else{
+                Review.create(req.body, {
+                    where : { UserId : req.body.UserId, GameId : req.body.GameId}
+                })
+                .then(() => {
+                    res.redirect('/')
+                })
+            }
         })
         .catch(err => {
             res.send(err)
@@ -34,22 +46,19 @@ class ControllerGame{
         })
     }
 
-
-
-
     static showAllGames(req,res) {
         // res.send('aaa')
         let q = {}
         if (req.query.title) {            
             q = { where: {
-                title: req.query.title
+                title: {$ilike : `%${req.query.title}%`}
             }}
 
             console.log(q)
         }
         Game.findAll(q)
             .then(games => {
-                res.render('gameHome', {games: games, user: 'admin' })
+                res.render('gameHome', {games: games, session :req.session })
             })
             .catch(err => {
                 console.log(err);

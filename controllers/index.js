@@ -52,5 +52,50 @@ class Controller{
             res.send(err)
         })
     }
+    static adminRole(req, res){
+        User
+        .findById(req.session.user.user_id)
+        .then(dataAdmin => {
+            Category
+            .findAll()
+            .then(category => {
+                res.render('adminGame', {dataAdmin , category})
+            })
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+    static addGame(req, res){
+        Game
+        .create(req.body)
+        .then(() => {
+            res.redirect('/admin')
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+    static adminCategory(req, res){
+        User
+        .findById(req.session.user.user_id)
+        .then(dataAdmin => {
+            res.render('adminCategory',{dataAdmin})
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+    static adminAddCategory(req, res){
+        Category
+        .create(req.body)
+        .then(() => {
+            res.redirect('/admin')
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+    
 }
 module.exports = Controller

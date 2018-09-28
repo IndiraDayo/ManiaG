@@ -13,8 +13,8 @@
                 <form action="/" method="GET">
                     <input type="text" placeholder=" search title" name="title">
                 <a class="menu_items" href= "/"><span>MENU</span></a>
-                <a class="menu_items" href= ""><span>profile</span></a>
-                <a class="menu_items" href= ""><span>logout</span></a>
+                <a class="menu_items" href= "<%= session.user.name%>/editProfile"><span>profile</span></a>
+                <a class="menu_items" href= "/logout"><span>logout</span></a>
             </form>
             </div>
         </nav>

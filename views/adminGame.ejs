@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Admin : <%= dataAdmin.username %></h1>
+    <a href="/admin/addCategory">Add Category</a>
+
+    <form action="/admin/addGameList" method="POST" >
+    <label>Title</label><br>
+    <input type="text" name="title"><br>
+    <label>Description</label><br>
+    <textarea name="description" id="5" cols="30" rows="10" placeholder="enter description here ..."></textarea><br>
+    <label>Image</label><br>
+    <input type="text" name="image"><br>
+    <select name="CategoryId">
+        <% category.forEach(list => { %>
+            <option value="<%= list.id%>"><%= list.name %></option>
+        <% }) %>
+    </select><br>
+    <input type="submit" value="Add Game">
+    </form>
+</body>
+</html>
