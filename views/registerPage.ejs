@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Document</title>
 </head>
-<body>
+<body align="center" class="wholebody">
+    <nav class="topbar">
+        <div class="logo">
+            <img style=" height: 3vw; line-height: 4vw;" src="/image/Logo (2).png"/>
+        </div>
+        <div class="menu boxhead">
+            <a type="hidden" class="menu_items" href= "/login"><span></span></a>
+            <a class="menu_items" href= "/register"><span></span></a>
+        </div>
+    </nav>
+    <div class="boxhead" style="margin-top: 10%; background: rgb(126, 24, 24); margin-left: 40%; margin-right: 40%; box-shadow: inset -0.3vw -0.3vw 0.5vw rgb(54, 7, 7), inset 0vw 0vw 0.5vw rgb(255, 192, 192);">
     <h1>REGISTER</h1>
-    <form action="/register" method="POST">
-        <label>Username :</label><br>
-        <input type="text" name="username"><br>
-        <label>Email :</label><br>
-        <input type="text" name="email"><br>
-        <label>Password</label><br>
-        <input type="text" name="password"><br>
-        <input type="submit" value="login">
-    </form>
+        <form action="/register" method="POST">
+            <label>Username :</label><br>
+            <input type="text" name="username"><br>
+            <label>Email :</label><br>
+            <input type="text" name="email"><br>
+            <label>Password</label><br>
+            <input type="text" name="password"><br>
+            <input type="submit" value="register">
+        </form>
+        <a style="background: white; color: black; font-size: 1vw; line-height: 4vw;  border-radius: 0.2vw;" href="/login">&nbsp; login &nbsp;</a>
+    </div>
 </body>
 </html>
