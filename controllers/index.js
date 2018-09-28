@@ -7,6 +7,7 @@ class Controller{
         .findAll()
         .then(showAllGame => {
             res.render('index' , {showAllGame, session : req.session})
+            // res.send(showAllGame)
         })
         .catch(err => {
             res.send(err)
