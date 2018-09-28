@@ -1,5 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
+  const Op = sequelize.Op
   const User = sequelize.define('User', {
     username: {
       type : DataTypes.STRING,
@@ -13,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
           }
         },
         notDuplicate : function(input, cbNotduplicate){
-          const Op = sequelize.Op
+          
           User.findOne({
             where : {id : {[Op.ne] : this.id},
              username : input}
@@ -42,28 +43,31 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     email: {
-      type : DataTypes.STRING,
-      validate : {
-        isEmail : {
-          args : true,
-          msg : 'please use valid email'
-        },
-        notDuplicate : function(input, cbNotduplicate){
-          const Op = sequelize.Op
-          User.findOne({
-            where : {id : {[Op.ne] : this.id},
-             email : input}
-          })
-          .then(data => {
-            if(data) cbNotduplicate('Email Already Use!')
-            else cbNotduplicate()
-          })
-          .catch(err => {
-            cbNotduplicate()
-          })
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          args: true,
+          msg: 'Masa nulis email aja ga bisa...'
+        }, 
+        isUnique: function (value, next) {
+          console.log(Op)
+          User.find({where: {email: value, id: {
+            [Op.ne]: this.username
+          }}})
+              .then(function (user) {
+                  // reject if a different user wants to use the same email
+                  if (user) {
+                    console.log(this.username);
+                    
+                      return next('Email already in use!');
+                  }
+                  return next();
+              })
+              .catch(function (err) {
+                  return next(err);
+              });
         }
-      }
-    },
+      }},
     role: DataTypes.STRING
   }, {
     hooks: {

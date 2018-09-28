@@ -28,8 +28,11 @@
                 <p>No Result Found</p>
             <% } %>
             <% games.forEach(game => { %>
-
-             <div class="gameDiv" onclick="location.href='/game/<%= game.id %>'">
+            <% if (session.user.role === 'admin') {%>
+                <div class="gameDiv" onclick="location.href='/game/<%= game.id %>/edit'">
+            <% } else { %>
+                <div class="gameDiv" onclick="location.href='/game/<%= game.id %>'">
+            <% } %>
 
                 <img style="float:left; height: 100%; width: 35%" src="/image/<%= game.image %>" />
                 <div style=" width: 55%;margin-left: 6%; margin-top: 2%;float:left; text-align: left;" >
@@ -50,8 +53,7 @@
         </div>
         <script type="text/javascript">
             function parentDiv(){ 
-                return location.href='/game/<%= game.id %>/edit';
-            }
+                
 
             function childDiv(msg ){
                 alert("this is from child : "+msg)

@@ -70,7 +70,7 @@ app.post('/register', (req, res) => {
         res.redirect('/')
     })
     .catch(err => {
-        res.send(err)
+        res.send(err.message)
     })
 })
 

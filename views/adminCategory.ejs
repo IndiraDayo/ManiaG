@@ -1,18 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Maniac</title>
 </head>
-<body>
-    <h1>Admin : <%= dataAdmin.username %></h1>
-    <form action="/admin/addCategory" method="POST">
-    <label>Category</label><br>
-    <input type="text" name="name"><br>
-    <input type="submit" value="Add Category">
-    </form>
+<body align="center" class="wholebody">
+    <nav class="topbar">
+        <div class="logo">
+            <img style=" height: 3vw; line-height: 4vw;" src="/image/Logo (2).png"/>
+        </div>
+        <div class="menu boxhead">
+            <form action="/" method="GET">
+                <input style="font-size: 0.9vw; line-height: 1.8vw;" type="text" placeholder=" search game name" name="title">
+            <a class="menu_items" href= "/"><span>MENU</span></a>
+            <% if (session.user.role === 'admin') {%> 
+            <a class="menu_items" href= "/admin"><span>addGame</span></a>
+            <% }%>
+            <a class="menu_items" href= "/<%= session.user.name%>/editProfile"><span>profile</span></a>
+            <a class="menu_items" href= "/logout"><span>logout</span></a>
 
+        </form>
+        </div>
+    </nav>
+    <div class="boxhead" style="margin-top: 10%; margin-bottom: 7%; color: white;">
+        <div class="gamePageDiv">
+            <p style="font-size: 3vw">Admin <%= dataAdmin.username %></p>
+            <form action="/admin/addCategory" method="POST">
+                <label>Category</label><br>
+                <input style="font-size: 1vw; line-height: 2vw;" type="text" name="name"><br>
+                <input type="submit" value="Add Category">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

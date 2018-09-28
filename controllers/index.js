@@ -50,7 +50,7 @@ class Controller{
             res.redirect('/')
         })
         .catch(err => {
-            res.send(err)
+            res.send(err.message)
         })
     }
     static adminRole(req, res){
@@ -60,7 +60,7 @@ class Controller{
             Category
             .findAll()
             .then(category => {
-                res.render('adminGame', {dataAdmin , category})
+                res.render('adminGame', {dataAdmin , category, session :req.session})
             })
         })
         .catch(err => {
@@ -81,7 +81,7 @@ class Controller{
         User
         .findById(req.session.user.user_id)
         .then(dataAdmin => {
-            res.render('adminCategory',{dataAdmin})
+            res.render('adminCategory',{dataAdmin, session :req.session})
         })
         .catch(err => {
             res.send(err)

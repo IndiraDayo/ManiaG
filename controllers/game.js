@@ -92,7 +92,7 @@ class ControllerGame{
                 .findAll()
                 .then(category => {
                     // res.send(dataGame)
-                    res.render('editGame',{dataAdmin, dataGame,category})
+                    res.render('editGame',{dataAdmin, dataGame,category, session :req.session})
                 })
             })
         })
