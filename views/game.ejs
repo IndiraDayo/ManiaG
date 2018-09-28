@@ -1,39 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1><%= showGameById.title %> (<%= helpers.ratingAverage(showAllRatingAndComment) %> / 5)</h1>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <title><%= showGameById.title%></title>
+    </head>
+    <body align="center" class="wholebody">
+        <nav class="topbar">
+            <div class="logo">
+                <img style=" height: 3vw; line-height: 4vw;" src="/image/Logo (2).png"/>
+            </div>
+            <div class="menu boxhead">
+                <form action="/" method="GET">
+                    <input style="font-size: 0.9vw; line-height: 1.8vw;" type="text" placeholder=" search game name" name="title">
+                <a class="menu_items" href= "/"><span>MENU</span></a>
+                <% if (session.user.role === 'admin') {%> 
+                <a class="menu_items" href= "/admin"><span>addGame</span></a>
+                <% }%>
+                <a class="menu_items" href= "/<%= session.user.name%>/editProfile"><span>profile</span></a>
+                <a class="menu_items" href= "/logout"><span>logout</span></a>
 
-    <p><%= showGameById.description %></p>
+            </form>
+            </div>
+        </nav>
+        <div style="margin-top: 10%; margin-bottom: 7%; color: white;">
+            <div class="gamePageDiv">
+                <div style="float: left; width: 35%; height: 87%; margin-top: 3%; margin-left: 3%;">
+                    <img style="float:left; height: 100%; width: 100%" src="/image/<%= showGameById.image %>" />
+                </div>
+                <div style="float: right; text-align: justify; width: 60%; margin-top: 3%;">
+                    <p style="font-size: 3.2vw"><%= showGameById.title %> </p>
+                    <p><%= helpers.ratingAverage(showAllRatingAndComment) %> / 5</p>
+                    <br>
+                    <p style="margin-right: 6%; height: 11.9vw;"><%= showGameById.description %></p>
+                    <br>
+                    <!-- nanti di sini di tambah kalo udah pernah rate jadi update pake change -->
+                    <form action="/game/<%= showGameById.id %>" method="POST">
+                        <input type="hidden" name="GameId" value="<%= showGameById.id %>">
+                        <input type="hidden" name="UserId" value="<%= session.user.user_id %>">
 
-    <form action="/game/<%= showGameById.id %>" method="POST">
-        <input type="hidden" name="GameId" value="<%= showGameById.id %>">
-        <input type="hidden" name="UserId" value="<%= session.user.user_id %>">
-        <label>Rating : </label>
-        <input type="text" name="rating">
-        <label>Comment : </label>
-        <input type="text" name="comment">
-        <input type="submit" value="Submit">
-    </form>
+                        Rate : <select name="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <br>
+                        
+                        <label>Comment : </label> <br>
 
-    <% showAllRatingAndComment.forEach(list => { %>
-        <% list.Users.forEach(listRating => { %>
-            <table border="1">
-                <tr>
-                    <td>
-                        <%= listRating.username %> <br>
-                        <%= listRating.Review.rating %> <br>
-                        <%= listRating.Review.comment %> <br>
-                    </td>
-                </tr>
-            </table>
-        <% }) %> 
-    <% }) %>
+                        <textarea rows="5" cols="95" name="comment">
+                        </textarea>
+
+                        <input class="submitButt" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+            
+            <div class="gameReviewDiv">
+                <p style="font-size: 2vw; margin: 2%;"> User Reviews</p>
+                <div style="margin: 2%;">
+                    <% showAllRatingAndComment.forEach(list => { %>
+                        <% list.Users.forEach(listRating => { %>
+                            <div style="background: rgba(82, 57, 51, 0.5);margin-top: 2%;margin-bottom: 2%;">
+                                <p style="font-size: 2vw;"><%= listRating.username %></p>
     
-</body>
+                                <p>Rated <%= listRating.Review.rating %> </p>
+
+                                <p><%= listRating.Review.comment %></p>
+                            </div>
+                        <% }) %>  
+                    <% }) %> 
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
