@@ -10,5 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     Review.belongsTo(models.User)
     Review.belongsTo(models.Game)
   };
+  Review.prototype.getStar = function(){
+    let star =''
+    for(let i = 0; i < this.rating; i++){
+      star += '*'
+    }
+    return star
+  }
+
   return Review;
 };

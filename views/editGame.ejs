@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Add Game</title>
+    <title>ManiaG</title>
 </head>
 <body align="center" class="wholebody">
     <nav class="topbar">
@@ -23,21 +23,27 @@
         </div>
     </nav>
     <div style="margin-top: 10%; margin-bottom: 7%; color: white;">
-        <div class="gamePageDiv">
-            <p style="font-size: 2vw">Edit Profile</p>
-            <% if (session.user.role === 'admin') {%>
-                <p style="font-size: 2.5vw">Welcome, Admin <%= session.user.name %></p>
-            <% } else {%>
-                <p style="font-size: 3vw">Welcome, <%= session.user.name %></p>
-            <% } %>
-            <br>    
-            <form action="/<%= session.user.name %>/editProfile" method="POST">
-                <label>Email :</label><br>
-                <input style="font-size: 1vw; line-height: 2vw;" type="text" name="email" value="<%= showForEdit.email %>"><br><br>
-                <label>Password</label><br>
-                <input style="font-size: 1vw; line-height: 2vw;" type="text" name="password" value="<%= showForEdit.password %>"><br><br>
-                <input type="submit" value="update">
-            </form>
-        </div>
-    </body>
+            <div class="gamePageDiv">
+                
+        
+
+
+
+    <form action="/game/<%= dataGame.id %>/edit" method="POST" >
+    <label>Title</label><br>
+    <input type="text" name="title" value="<%= dataGame.title %>"><br>
+    <label>Description</label><br>
+    <textarea name="description" id="5" cols="30" rows="10"><%= dataGame.description %></textarea><br>
+    <label>Image</label><br>
+    <input type="text" name="image" value="<%= dataGame.image %>"><br>
+    <select name="CategoryId">
+        <% category.forEach(list => { %>
+            <option value="<%= list.id%>"><%= list.name %></option>
+        <% }) %>
+    </select><br>
+    <input type="submit" value="Add Game">
+    </form>
+
+    <a href="/game/<%= dataGame.id %>/delete"> delete</a>
+</body>
 </html>

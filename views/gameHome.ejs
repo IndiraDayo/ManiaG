@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <title>Game Page</title>
+    </head>
+    <body align="center" class="wholebody">
+        <nav class="topbar">
+            <div class="logo">
+                <img style=" height: 3vw; line-height: 4vw;" src="/image/Logo (2).png"/>
+            </div>
+            <div class="menu boxhead">
+                <form action="/" method="GET">
+                    <input style="font-size: 0.9vw; line-height: 1.8vw;" type="text" placeholder=" search game name" name="title">
+                <a class="menu_items" href= "/"><span>MENU</span></a>
+                <% if (session.user.role === 'admin') {%> 
+                <a class="menu_items" href= "/admin"><span>addGame</span></a>
+                <% }%>
+                <a class="menu_items" href= "/<%= session.user.name%>/editProfile"><span>profile</span></a>
+                <a class="menu_items" href= "/logout"><span>logout</span></a>
+
+
+            </form>
+            </div>
+        </nav>
+        <div style="margin-top: 10%; margin-bottom: 7%; color: white;">
+            <% if (games[0] === undefined) { %>
+                <p>No Result Found</p>
+            <% } %>
+            <% games.forEach(game => { %>
+            <% if (session.user.role === 'admin') {%>
+                <div class="gameDiv" onclick="location.href='/game/<%= game.id %>/edit'">
+            <% } else { %>
+                <div class="gameDiv" onclick="location.href='/game/<%= game.id %>'">
+            <% } %>
+
+                <img style="float:left; height: 100%; width: 35%" src="/image/<%= game.image %>" />
+                <div style=" width: 55%;margin-left: 6%; margin-top: 2%;float:left; text-align: left;" >
+                    <p style="margin-bottom: 2%;font-size: 2.5vw; font-family: 'Avenir';"><%= game.title %></>
+                    
+                    <% if (game.description.length >320) {%>
+                    <p style="font-size: 1vw; font-family: 'Avenir';"><%= game.description.substr(0,320) %>...</>
+                    <% } else { %>
+                    <p style="font-size: 1vw; font-family: 'Avenir';"><%= game.description %></>
+                    <% } %>
+                </div>
+               
+             </div>
+            <% }) %>
+        </div>
+        <script type="text/javascript">
+            function parentDiv(){ 
+                
+
+            function childDiv(msg ){
+                alert("this is from child : "+msg)
+            // A cross browser compatible way to stop propagation of the event:
+                if (!e) var e = window.event;
+                e.cancelBubble = true;
+                if (e.stopPropagation) e.stopPropagation();
+            }
+        </script>
+    </body>
+</html>

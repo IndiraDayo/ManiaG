@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const auth = require("./helpers/authentification");
 const routes = require('./routes/index')
 const {User} = require('./models/index')
+const Controller = require('./controllers/index')
 
 
 app.set('view engine', 'ejs')
@@ -12,8 +13,10 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use( express.static( "public" ) );
 app.use('/css', express.static('public/css'))
 app.use('/img', express.static('public/img'))
+
 
 const session = require('express-session')
 app.use(session({
@@ -26,9 +29,7 @@ app.use(session({
     }
 }))
 
-app.get('/dummy', auth, (req, res) => {
-    res.send(' ini adalah root dummy')
-})
+
 app.get("/login",function(req, res){
     res.render('loginPage')
 })
@@ -43,9 +44,16 @@ app.post('/login', (req,res) => {
     .then(getId => {
         req.session.user = {
             name : getId.username,
-            user_id : getId.id
+            user_id : getId.id,
+            role : getId.role
         }
-        res.redirect('/')
+        if(getId.role === 'user'){
+            res.redirect('/')
+        }
+        else if(getId.role === 'admin'){
+            res.redirect('/admin')
+
+        }
     })
     .catch(err => {
         res.send(err.message)
@@ -62,9 +70,29 @@ app.post('/register', (req, res) => {
         res.redirect('/')
     })
     .catch(err => {
-        res.send(err)
+        res.send(err.message)
     })
 })
+
+app.get('/admin', auth, Controller.adminRole)
+
+app.get('/logout' , (req, res) => {
+    req.session.destroy(err => {
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.redirect('/')
+        }
+    })
+})
+
+
+const routerGame = require('./routes/game')
+app.locals.helpers = require('./helpers/index')
+
+app.use('/', auth, routerGame) // ini harus di ubah jadi ke bawah
+app.use('/game', auth, routerGame)
 
 app.use('/', routes)
 

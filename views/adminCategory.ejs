@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Add Game</title>
+    <title>Maniac</title>
 </head>
 <body align="center" class="wholebody">
     <nav class="topbar">
@@ -22,22 +22,15 @@
         </form>
         </div>
     </nav>
-    <div style="margin-top: 10%; margin-bottom: 7%; color: white;">
+    <div class="boxhead" style="margin-top: 10%; margin-bottom: 7%; color: white;">
         <div class="gamePageDiv">
-            <p style="font-size: 2vw">Edit Profile</p>
-            <% if (session.user.role === 'admin') {%>
-                <p style="font-size: 2.5vw">Welcome, Admin <%= session.user.name %></p>
-            <% } else {%>
-                <p style="font-size: 3vw">Welcome, <%= session.user.name %></p>
-            <% } %>
-            <br>    
-            <form action="/<%= session.user.name %>/editProfile" method="POST">
-                <label>Email :</label><br>
-                <input style="font-size: 1vw; line-height: 2vw;" type="text" name="email" value="<%= showForEdit.email %>"><br><br>
-                <label>Password</label><br>
-                <input style="font-size: 1vw; line-height: 2vw;" type="text" name="password" value="<%= showForEdit.password %>"><br><br>
-                <input type="submit" value="update">
+            <p style="font-size: 3vw">Admin <%= dataAdmin.username %></p>
+            <form action="/admin/addCategory" method="POST">
+                <label>Category</label><br>
+                <input style="font-size: 1vw; line-height: 2vw;" type="text" name="name"><br>
+                <input type="submit" value="Add Category">
             </form>
         </div>
-    </body>
+    </div>
+</body>
 </html>
